@@ -1,0 +1,146 @@
+[versions]
+agp = "8.10.0-alpha02"
+annotation = "1.9.1"
+dagger = "2.53.1"
+kable = "0.34.0"
+kotlin = "2.1.0"
+koin = "4.0.0"
+ktor = "3.0.0"
+accompanist = "0.36.0"
+compose-multiplatform = "1.7.3"
+compose-ui="1.7.6"
+androidx-activityCompose = "1.10.0"
+junit = "4.14-SNAPSHOT"
+junitVersion = "1.2.1"
+espressoCore = "3.6.1"
+lifecycleVersion = "2.8.7"
+napier = "2.7.1"
+androidCore = "1.15.0"
+appcompat = "1.7.0"
+material = "1.12.0"
+activity = "1.10.0"
+constraintlayout = "2.2.0"
+# Hilt 是对 Dagger 高层抽象，简化了依赖注入
+hilt = "2.53.1"
+hiltExt = "1.2.0"
+devtools-ksp = "2.1.0-1.0.29"
+
+[libraries]
+androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
+androidx-core = { group = "androidx.core", name = "core", version.ref = "androidCore" }
+androidx-core-ktx = { group = "androidx.core", name = "core-ktx", version.ref = "androidCore" }
+androidx-activity-compose = { module = "androidx.activity:activity-compose", version.ref = "androidx-activityCompose" }
+lifecycle-viewmodel-compose = { module = "androidx.lifecycle:lifecycle-viewmodel-compose", version.ref = "lifecycleVersion" }
+androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-runtime-ktx", version.ref = "lifecycleVersion" }
+androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version.ref = "lifecycleVersion" }
+androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleVersion" }
+androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-ui" }
+androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
+# HTTP服务库，帮助kotlin实现web service或者web client
+ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
+ktor-client-core = { module = "io.ktor:ktor-client-core", version.ref = "ktor" }
+ktor-client-darwin = { module = "io.ktor:ktor-client-darwin", version.ref = "ktor" }
+ktor-client-okhttp = { module = "io.ktor:ktor-client-okhttp", version.ref = "ktor" }
+ktor-serialization-kotlinx-json = { module = "io.ktor:ktor-serialization-kotlinx-json", version.ref = "ktor" }
+
+#一个流行的依赖注入（Dependency Injection, DI）框架，主要用于 Java 和 Android 开发
+dagger = { module = "com.google.dagger:dagger", version.ref = "dagger" }
+# 对Dagger的高层抽象，简化注入方式
+hilt-android-core = { group = "com.google.dagger", name = "hilt-android", version.ref = "hilt" }
+hilt-android-testing = { group = "com.google.dagger", name = "hilt-android-testing", version.ref = "hilt" }
+hilt-compiler = { group = "com.google.dagger", name = "hilt-android-compiler", version.ref = "hilt" }
+#又一个依赖注入框架，和Dagger不同，Dagger是编译时依赖，Koin运行时主要针对kotlin设计更灵活
+#同时koin的优势可以跨平台，可以在commonMain中引用，但是dagger，dagger-hilt不支持跨平台只能在androidMain中引用
+koin-core = { module = "io.insert-koin:koin-core", version.ref = "koin" }
+koin-android = {module = "io.insert-koin:koin-android", version.ref = "koin"}
+koin-test = {module = "io.insert-koin:koin-test", version.ref = "koin"}
+koin-compose-viewmodel = { module = "io.insert-koin:koin-compose-viewmodel", version.ref = "koin" }
+koin-compose-viewmodel-nav = {module = "io.insert-koin:koin-compose-viewmodel-navigation", version.ref = "koin"}
+#专注于 Kotlin Multiplatform 项目的蓝牙低功耗（Bluetooth Low Energy, BLE）通信
+kable-core = { module = "com.juul.kable:kable-core", version.ref = "kable" }
+kable-exception = { module = "com.juul.kable:kable-exceptions", version.ref = "kable" }
+kable-khronicle = { module = "com.juul.khronicle:khronicle-core", version = "0.5.0" }
+kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
+
+junit = { group = "junit", name = "junit", version.ref = "junit" }
+# 跨平台的socket网络通讯库
+io-netty-transport = { module="io.netty:netty-transport", version="4.1.92.Final"}
+io-netty-buffer = { module="io.netty:netty-buffer", version="4.1.92.Final"}
+io-netty-codec = { module="io.netty:netty-codec", version="4.1.92.Final"}
+# 跨平台的日志库
+napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+
+accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
+androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
+material = { group = "com.google.android.material", name = "material", version.ref = "material" }
+androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
+androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+
+[bundles]
+google-permissions = [
+    "accompanist-permissions",
+]
+android-main = [
+    "androidx-core",
+    "androidx-core-ktx",
+    "androidx-annotation",
+    "androidx-activity-compose",
+    "lifecycle-viewmodel-compose",
+    "androidx-lifecycle-runtime",
+    "androidx-lifecycle-common",
+    "androidx-lifecycle-viewmodel-android",
+    "androidx-compose-ui-tooling",
+    "androidx-junit",
+    "androidx-espresso-core",
+    "koin-android"
+]
+dagger-hilt = [
+    "hilt-android-core",
+    "hilt-android-testing",
+    "hilt-compiler"
+]
+koin = [
+    "koin-core",
+    "koin-test",
+    "koin-compose-viewmodel",
+    "koin-compose-viewmodel-nav"
+]
+netty = [
+    "io-netty-transport",
+    "io-netty-buffer",
+    "io-netty-codec"
+]
+
+ktor = [
+    "ktor-client-content-negotiation",
+    "ktor-client-core",
+    "ktor-client-darwin",
+    "ktor-client-okhttp",
+    "ktor-serialization-kotlinx-json"
+]
+
+kable = [
+    "kable-core",
+    "kable-exception",
+    "kable-khronicle"
+]
+
+test = [
+    "junit",
+    "kotlin-test"
+]
+
+[plugins]
+androidApplication = { id = "com.android.application", version.ref = "agp" }
+androidLibrary = { id = "com.android.library", version.ref = "agp" }
+composeMultiplatform = { id = "org.jetbrains.compose", version.ref = "compose-multiplatform" }
+kotlinAndroid = { id = "org.jetbrains.kotlin.android", version.ref = "kotlin" }
+kotlinMultiplatform = { id = "org.jetbrains.kotlin.multiplatform", version.ref = "kotlin" }
+kotlinCocoapods = { id = "org.jetbrains.kotlin.native.cocoapods", version.ref = "kotlin" }
+kotlinxSerialization = { id = "org.jetbrains.kotlin.plugin.serialization", version.ref = "kotlin" }
+composeCompiler = { id = "org.jetbrains.kotlin.plugin.compose", version.ref = "kotlin" }
+dagger-hilt = { id = "com.google.dagger.hilt.android", version.ref = "hilt" }
+devtools-ksp = { id = "com.google.devtools.ksp", version.ref = "devtools-ksp" }
+
+
