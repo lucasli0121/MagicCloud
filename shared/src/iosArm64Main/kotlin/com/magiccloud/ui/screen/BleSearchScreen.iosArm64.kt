@@ -11,8 +11,7 @@ actual fun bluetoothPermissionsNeeded(context: Any): Boolean {
 
 @Composable
 actual fun ShowAdvertisementItem(
-    advertisment: PlatformAdvertisement,
+    advertisement: PlatformAdvertisement,
     onClick: () -> Unit
 ) {
-    TODO("Not yet implemented")
 }

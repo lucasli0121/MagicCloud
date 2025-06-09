@@ -7,5 +7,17 @@
     <string name="full_screen">全屏</string>
     <string name="ble_search">蓝牙搜索</string>
     <string name="device_set_wifi">设备配网</string>
+    <string name="wifi_account_error">网络账号错误</string>
+    <string name="wifi_connect_failed">网络连接失败</string>
+    <string name="wifi_connect_success">网络连接成功</string>
+    <string name="wifi_connecting">网络正在连接</string>
+    <string name="bluetooth_disconnect">蓝牙断开</string>
+    <string name="bluetooth_disavaliablest">蓝牙不可用</string>"
     <string name="back">返回</string>
+    <string name="cancel">取消</string>
+    <string name="wifi">Wifi:</string>
+    <string name="wifi_passwd">密码:</string>
+    <string name="next">下一步</string>
+    <string name="ok">确定</string>
+    <string name="wrong_prompt_title">输入提示</string>
 </resources>

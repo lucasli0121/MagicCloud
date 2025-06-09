@@ -20,6 +20,7 @@ import kotlinx.coroutines.Job
 import kotlinx.coroutines.cancel
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.ensureActive
+import kotlinx.coroutines.flow.collect
 import kotlinx.coroutines.flow.filter
 import kotlinx.coroutines.flow.onCompletion
 import kotlinx.coroutines.flow.onEach
@@ -60,6 +61,12 @@ class BleViewModel(
         if(systemStatus == BluetoothStatus.Available)  internalStatus else systemStatus
     }
 
+    fun writeWifi(ssid: String, passwd: String) {
+        viewModelScope.launch {
+            bleDevice.writeWifi(ssid, passwd)
+            boardStateData.collect()
+        }
+    }
     // 订阅主板状态通知事件
     val boardStateData = bleDevice.boardStateObserve
         .onStart {  }
@@ -125,7 +132,7 @@ class BleViewModel(
                             State.Connecting.Services,
                             State.Connecting.Observes,
                                 -> BluetoothStatus.Connecting
-                            State.Connected,
+                            is State.Connected,
                                 -> BluetoothStatus.Connected // or set it in connectToPeripheral()
                         }
                     }

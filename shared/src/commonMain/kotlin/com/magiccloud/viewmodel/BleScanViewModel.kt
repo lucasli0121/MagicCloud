@@ -47,7 +47,10 @@ class BleScanViewModel(private val bluetoothManager: PlatformBluetoothManager) :
             withTimeoutOrNull(ScanDurationMillts) {
                 val advertisement = bluetoothScanner
                     .advertisements
-                    .catch { cause -> _status.value = BluetoothStatus.Failed(cause.message?:"Unknown error") }
+                    .catch {
+                        cause ->
+                            _status.value = BluetoothStatus.Failed(cause.message?:"Unknown error")
+                    }
                     .onCompletion { cause ->
                         if(cause == null || cause is CancellationException) {
                             _status.value = BluetoothStatus.ScanStoped

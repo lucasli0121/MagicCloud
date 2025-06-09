@@ -15,19 +15,20 @@ plugins {
 
 kotlin {
     androidTarget {
-        @OptIn(ExperimentalKotlinGradlePluginApi::class)
         compilerOptions {
             jvmTarget.set(JvmTarget.JVM_17)
             freeCompilerArgs.add("-Xexpect-actual-classes")
         }
+
     }
 
     listOf(
         iosX64(),
         iosArm64(),
         iosSimulatorArm64()
-    ).forEach {
-        it.binaries.framework {
+    //noinspection WrongGradleMethod
+    ).forEach { target ->
+        target.binaries.framework {
             baseName = "shared"
             isStatic = true
         }
@@ -45,12 +46,12 @@ kotlin {
                 implementation(compose.material3)
                 implementation(compose.ui)
                 implementation(compose.components.resources)
-                implementation(compose.components.uiToolingPreview)
-                implementation(libs.bundles.netty)
                 implementation(libs.bundles.kable)
                 implementation(libs.bundles.koin)
                 implementation(libs.napier)
-
+                implementation(libs.uuid)
+                implementation(libs.bundles.netty)
+                implementation(libs.kotlin.test)
             }
         }
         val androidMain by getting {
@@ -58,19 +59,39 @@ kotlin {
             dependencies {
                 implementation(libs.bundles.android.main)
                 implementation(libs.bundles.google.permissions)
+                implementation(compose.components.uiToolingPreview)
             }
         }
-        val iosMain by creating {
+        val iosArm64Main by getting {
             dependsOn(commonMain)
         }
-        val iosArm64Main by getting
-        val iosSimulatorArm64Main by getting
-        val iosX64Main by getting
-
-        commonTest.dependencies {
-            implementation(libs.kotlin.test)
+        val iosSimulatorArm64Main by getting {
+            dependsOn(commonMain)
+        }
+        val iosX64Main by getting {
+            dependsOn(commonMain)
         }
     }
+}
+
+configurations.all {
+    resolutionStrategy {
+        // Force all Netty components to use the same version
+        force("io.netty:netty-buffer:4.2.0.RC1")
+        force("io.netty:netty-codec:4.2.0.RC1")
+        force("io.netty:netty-transport:4.2.0.RC1")
+        force("io.netty:netty-resolver:4.2.0.RC1")
+    }
+}
+
+tasks.withType<Test> {
+    useJUnitPlatform()
+
+    // Exclude duplicate entries for test tasks
+    jvmArgs = listOf(
+        "--add-opens=java.base/java.util=ALL-UNNAMED",
+        "--add-opens=java.base/java.lang=ALL-UNNAMED"
+    )
 }
 
 android {
@@ -82,6 +103,15 @@ android {
     compileOptions {
         sourceCompatibility = JavaVersion.VERSION_17
         targetCompatibility = JavaVersion.VERSION_17
+    }
+
+    packaging {
+        resources {
+            excludes.add("/META-INF/{AL2.0,LGPL2.1}")
+            excludes.add("META-INF/INDEX.LIST")
+            excludes.add("META-INF/io.netty.versions.properties")
+            excludes.add("META-INF/*")
+        }
     }
 
     buildTypes {

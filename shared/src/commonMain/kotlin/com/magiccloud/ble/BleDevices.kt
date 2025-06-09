@@ -1,7 +1,5 @@
 package com.magiccloud.ble
 
-import com.benasher44.uuid.Uuid
-import com.benasher44.uuid.uuidFrom
 import com.juul.kable.Characteristic
 import com.juul.kable.Filter
 import com.juul.kable.Peripheral
@@ -18,50 +16,67 @@ import kotlinx.coroutines.flow.first
 import kotlin.coroutines.cancellation.CancellationException
 import kotlin.coroutines.coroutineContext
 import kotlin.experimental.or
+import kotlin.uuid.ExperimentalUuidApi
+import kotlin.uuid.Uuid
 
-val SERVICE_UUID = uuidFrom("000000FF-0000-1000-8000-00805F9B34FB")
+@OptIn(ExperimentalUuidApi::class)
+val SERVICE_UUID = kotlin.uuid.Uuid.parse("000000FF-0000-1000-8000-00805F9B34FB")
+@OptIn(ExperimentalUuidApi::class)
 private val serviceUuid = tagUuid("00F4")
+@OptIn(ExperimentalUuidApi::class)
 private val wifiConfigUuid = tagUuid("F401")
+@OptIn(ExperimentalUuidApi::class)
 private val cmdConfigUuid = tagUuid("F403")
+@OptIn(ExperimentalUuidApi::class)
 private val boardMsgUuid = tagUuid("F501")
+@OptIn(ExperimentalUuidApi::class)
 private val boardStateUuid = tagUuid("F301")
+@OptIn(ExperimentalUuidApi::class)
 private val radarDataUuid = tagUuid("F302")
 
 private const val RETRY_ATTEMPTS = 7
 
-private fun tagUuid(short16BitUuid: String) : Uuid =
-    uuidFrom("0000${short16BitUuid.lowercase()}-0000-1000-8000-00805F9B34FB")
+@OptIn(ExperimentalUuidApi::class)
+private fun tagUuid(short16BitUuid: String) : kotlin.uuid.Uuid =
+    kotlin.uuid.Uuid.parse("0000${short16BitUuid.lowercase()}-0000-1000-8000-00805F9B34FB")
 
 // from uuid to string
+@OptIn(ExperimentalUuidApi::class)
 private fun characteristicOf(service: Uuid, characteristic: Uuid) =
-    characteristicOf(service.toString(), characteristic.toString())
+    characteristicOf(service, characteristic)
 
+@OptIn(ExperimentalUuidApi::class)
 val wifiConfigCharacteristic = characteristicOf(
     service = serviceUuid,
     characteristic = wifiConfigUuid,
 )
 
+@OptIn(ExperimentalUuidApi::class)
 val cmdConfigCharacteristic = characteristicOf(
     service = serviceUuid,
     characteristic = cmdConfigUuid,
 )
 
+@OptIn(ExperimentalUuidApi::class)
 val boardStateCharacteristic = characteristicOf(
     service = serviceUuid,
     characteristic = boardStateUuid,
 )
 
+@OptIn(ExperimentalUuidApi::class)
 val radarDataCharacteristic = characteristicOf(
     service = serviceUuid,
     characteristic = radarDataUuid,
 )
 
+@OptIn(ExperimentalUuidApi::class)
 val boardMsgCharacteristic = characteristicOf(
     service = serviceUuid,
     characteristic = boardMsgUuid,
 )
 expect val bluetoothScannerWithBuilder : Scanner<PlatformAdvertisement>
 
+@OptIn(ExperimentalUuidApi::class)
 val bluetoothScanner = Scanner {
     logging {
         engine = SystemLogEngine

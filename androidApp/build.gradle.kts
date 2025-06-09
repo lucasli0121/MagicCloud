@@ -14,10 +14,12 @@ android {
         minSdk = 29
         versionCode = 1
         versionName = "1.0"
+        testInstrumentationRunner = "androidx.test.runner.AndroidJUnitRunner"
     }
     buildFeatures {
         compose = true
     }
+
     packaging {
         resources {
             excludes.add("/META-INF/{AL2.0,LGPL2.1}")
@@ -25,6 +27,7 @@ android {
             excludes.add("META-INF/io.netty.versions.properties")
         }
     }
+
     buildTypes {
         getByName("release") {
             isMinifyEnabled = false
@@ -45,6 +48,7 @@ dependencies {
     implementation(compose.material3)
     implementation(compose.ui)
     implementation(compose.components.resources)
+    implementation(compose.preview)
     implementation(compose.components.uiToolingPreview)
     implementation(projects.shared)
     implementation(libs.bundles.google.permissions)
@@ -53,4 +57,5 @@ dependencies {
     implementation(libs.bundles.koin)
     implementation(libs.koin.android)
     implementation(libs.napier)
+    implementation(libs.bundles.androidx.test)
 }

@@ -31,5 +31,11 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+        <activity android:name=".TestActivity" android:exported="true"/>
+        <uses-library android:name="android.test.runner"/>
     </application>
+    <instrumentation
+        android:name="androidx.test.runner.AndroidJUnitRunner"
+        android:targetPackage="com.magiccloud.android"
+        />
 </manifest> 

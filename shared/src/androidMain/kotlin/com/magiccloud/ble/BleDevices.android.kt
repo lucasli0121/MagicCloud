@@ -7,8 +7,9 @@ import com.juul.kable.PlatformAdvertisement
 import com.juul.kable.Scanner
 import com.juul.kable.logs.Logging
 import com.juul.kable.logs.SystemLogEngine
+import kotlin.uuid.ExperimentalUuidApi
 
-@OptIn(ObsoleteKableApi::class)
+@OptIn(ObsoleteKableApi::class, ExperimentalUuidApi::class)
 actual val bluetoothScannerWithBuilder: Scanner<PlatformAdvertisement>
     get() = Scanner {
         scanSettings = ScanSettings.Builder()

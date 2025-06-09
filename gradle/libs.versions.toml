@@ -1,29 +1,31 @@
 [versions]
-agp = "8.10.0-alpha02"
+agp = "8.10.0-rc04"
 annotation = "1.9.1"
-dagger = "2.53.1"
-kable = "0.34.0"
-kotlin = "2.1.0"
-koin = "4.0.0"
-ktor = "3.0.0"
-accompanist = "0.36.0"
+dagger = "2.56"
+kable = "0.36.1"
+kotlin = "2.1.20"
+koin = "4.0.2"
+ktor = "3.1.1"
+accompanist = "0.37.2"
 compose-multiplatform = "1.7.3"
-compose-ui="1.7.6"
-androidx-activityCompose = "1.10.0"
-junit = "4.14-SNAPSHOT"
-junitVersion = "1.2.1"
+compose-ui="1.7.8"
+androidx-activityCompose = "1.10.1"
+junit = "4.13.2"
+android-test-ext = "1.2.1"
+android-test-runner = "1.6.2"
 espressoCore = "3.6.1"
 lifecycleVersion = "2.8.7"
 napier = "2.7.1"
 androidCore = "1.15.0"
 appcompat = "1.7.0"
 material = "1.12.0"
-activity = "1.10.0"
-constraintlayout = "2.2.0"
+activity = "1.10.1"
+constraintlayout = "2.2.1"
+uuid = "0.8.4"
 # Hilt 是对 Dagger 高层抽象，简化了依赖注入
-hilt = "2.53.1"
+hilt = "2.56"
 hiltExt = "1.2.0"
-devtools-ksp = "2.1.0-1.0.29"
+devtools-ksp = "2.1.20-1.0.31"
 
 [libraries]
 androidx-annotation = { module = "androidx.annotation:annotation", version.ref = "annotation" }
@@ -35,7 +37,12 @@ androidx-lifecycle-runtime = { group = "androidx.lifecycle", name = "lifecycle-r
 androidx-lifecycle-common = { module = "androidx.lifecycle:lifecycle-common", version.ref = "lifecycleVersion" }
 androidx-lifecycle-viewmodel-android = { group = "androidx.lifecycle", name = "lifecycle-viewmodel-android", version.ref = "lifecycleVersion" }
 androidx-compose-ui-tooling = { module = "androidx.compose.ui:ui-tooling", version.ref = "compose-ui" }
-androidx-junit = { group = "androidx.test.ext", name = "junit", version.ref = "junitVersion" }
+androidx-junit = { group = "junit", name = "junit", version.ref = "junit" }
+androidx-test-ext = { group = "androidx.test.ext", name = "junit", version.ref = "android-test-ext" }
+androidx-test-runner = { group = "androidx.test", name = "runner", version.ref = "android-test-runner" }
+androidx-ui-text = {group = "androidx.compose.ui", name = "ui-text", version.ref = "compose-ui"}
+androidx-ui-test-junit4-android = { group = "androidx.compose.ui", name = "ui-test-junit4-android", version.ref = "compose-ui" }
+
 androidx-espresso-core = { group = "androidx.test.espresso", name = "espresso-core", version.ref = "espressoCore" }
 # HTTP服务库，帮助kotlin实现web service或者web client
 ktor-client-content-negotiation = { module = "io.ktor:ktor-client-content-negotiation", version.ref = "ktor" }
@@ -60,22 +67,25 @@ koin-compose-viewmodel-nav = {module = "io.insert-koin:koin-compose-viewmodel-na
 #专注于 Kotlin Multiplatform 项目的蓝牙低功耗（Bluetooth Low Energy, BLE）通信
 kable-core = { module = "com.juul.kable:kable-core", version.ref = "kable" }
 kable-exception = { module = "com.juul.kable:kable-exceptions", version.ref = "kable" }
-kable-khronicle = { module = "com.juul.khronicle:khronicle-core", version = "0.5.0" }
+kable-khronicle = { module = "com.juul.khronicle:khronicle-core", version = "0.5.1" }
 kotlin-test = { module = "org.jetbrains.kotlin:kotlin-test", version.ref = "kotlin" }
 
-junit = { group = "junit", name = "junit", version.ref = "junit" }
+
 # 跨平台的socket网络通讯库
-io-netty-transport = { module="io.netty:netty-transport", version="4.1.92.Final"}
-io-netty-buffer = { module="io.netty:netty-buffer", version="4.1.92.Final"}
-io-netty-codec = { module="io.netty:netty-codec", version="4.1.92.Final"}
+io-netty-transport = { module="io.netty:netty-transport", version="4.2.0.RC1"}
+io-netty-buffer = { module="io.netty:netty-buffer", version="4.2.0.RC1"}
+io-netty-codec = { module="io.netty:netty-codec", version="4.2.0.RC1"}
 # 跨平台的日志库
 napier = { module = "io.github.aakira:napier", version.ref = "napier" }
+#跨平台uuid
+uuid = { module = "com.benasher44:uuid", version.ref = "uuid" }
 
 accompanist-permissions = { module = "com.google.accompanist:accompanist-permissions", version.ref = "accompanist" }
 androidx-appcompat = { group = "androidx.appcompat", name = "appcompat", version.ref = "appcompat" }
 material = { group = "com.google.android.material", name = "material", version.ref = "material" }
 androidx-activity = { group = "androidx.activity", name = "activity", version.ref = "activity" }
 androidx-constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
+
 
 [bundles]
 google-permissions = [
@@ -91,9 +101,15 @@ android-main = [
     "androidx-lifecycle-common",
     "androidx-lifecycle-viewmodel-android",
     "androidx-compose-ui-tooling",
-    "androidx-junit",
     "androidx-espresso-core",
     "koin-android"
+]
+androidx-test = [
+    "androidx-junit",
+    "androidx-test-ext",
+    "androidx-test-runner",
+    "androidx-ui-text",
+    "androidx-ui-test-junit4-android"
 ]
 dagger-hilt = [
     "hilt-android-core",
@@ -122,13 +138,7 @@ ktor = [
 
 kable = [
     "kable-core",
-    "kable-exception",
     "kable-khronicle"
-]
-
-test = [
-    "junit",
-    "kotlin-test"
 ]
 
 [plugins]

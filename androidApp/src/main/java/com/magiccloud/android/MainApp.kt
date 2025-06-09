@@ -7,6 +7,7 @@ import com.magiccloud.AndroidPlatformContext
 import com.magiccloud.ble.PlatformBluetoothManager
 import com.magiccloud.di.appModule
 import com.magiccloud.di.viewModelModule
+import com.magiccloud.utils.initToastUtil
 import io.github.aakira.napier.DebugAntilog
 import io.github.aakira.napier.Napier
 import org.koin.android.ext.koin.androidContext
@@ -22,6 +23,7 @@ import org.koin.dsl.module
 class MainApp: Application() {
     override fun onCreate() {
         super.onCreate()
+        initToastUtil(applicationContext)
         // 启动Napier日志
         Napier.base(DebugAntilog())
         startKoin {
